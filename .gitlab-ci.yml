@@ -15,4 +15,4 @@ jobs:
     - gitlab
   script:
     - echo Verifying
-    - ./arduino-1.6.9/arduino --verify --board arduino:avr:mega Ner_Lighting_System
+    - ./arduino-1.6.9/arduino --verify --board arduino:avr:mega Ner_Lighting_System.ino

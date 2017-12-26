@@ -9,8 +9,8 @@
 *.sln
 *.vcxproj
 *.vcxproj.filters
-_vm
-Debug
+.vs/
+_vm/
 sketch.json
 
 # User-specific files (MonoDevelop/Xamarin Studio)

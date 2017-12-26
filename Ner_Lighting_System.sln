@@ -8,7 +8,6 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{3E27591A-E313-4226-8E15-FEAC92E071EB}"
 	ProjectSection(SolutionItems) = preProject
 		layout.jpg = layout.jpg
-		ReadMe.Adoc = ReadMe.Adoc
 		ReadMe.md = ReadMe.md
 	EndProjectSection
 EndProject

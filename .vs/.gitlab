@@ -1,0 +1,13 @@
+{
+  "User": {
+    "Id": 285475,
+    "Username": "chabad360",
+    "Name": "Mendel Greenberg",
+    "Email": "chabad360@gmail.com",
+    "AvatarUrl": "https://secure.gravatar.com/avatar/9322ec6de28e75d51cfbc1b09f31997d?s=80&d=identicon",
+    "PrivateToken": "a66671049187a65cceead3b7e9c6bdf3a194faa44fdba0a7916b6b2fc75cd967",
+    "Host": "https://gitlab.com",
+    "TwoFactorEnabled": false,
+    "ApiVersion": 3
+  }
+}

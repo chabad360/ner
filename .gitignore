@@ -9,7 +9,6 @@
 *.sln
 *.vcxproj
 *.vcxproj.filters
-.vs/
 _vm/
 sketch.json
 
@@ -265,3 +264,4 @@ paket-files/
 # Python Tools for Visual Studio (PTVS)
 __pycache__/
 *.pyc
+/__vm

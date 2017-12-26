@@ -65,50 +65,38 @@ void loop()
         switch (key)
         {
             case '0':
-                num = num + "0";
-                flash();
+				addNum("0");
                 break;
             case '1':
-                num = num + "1";
+				addNum("1");
                 flash();
                 break;
             case '2':
-                num = num + "2";
-                flash();
+				addNum("2");
                 break;
             case '3':
-                num = num + "3";
-                flash();
+				addNum("3");
                 break;
             case '4':
-                num = num + "4";
-                flash();
+				addNum("4");
                 break;
             case '5':
-                num = num + "5";
-                flash();
+				addNum("5");
                 break;
             case '6':
-                num = num + "6";
-                flash();
+				addNum("6");
                 break;
             case '7':
-                num = num + "7";
-                flash();
+				addNum("7");
                 break;
             case '8':
-                num = num + "8";
-                flash();
+				addNum("8");
                 break;
             case '9':
-                num = num + "9";
-                flash();
+				addNum("9");
                 break;
             case 'A':
-				for (int i = 0; i <= nums->length(); i++) // run through all entries in nums
-				{
-					digitalWrite(leds[i], HIGH);
-				}
+				toggle("all", HIGH);
 				break;
             case 'B':
 				for (int i = 0; i <= nums->length(); i++) // run through all entries in nums
@@ -130,17 +118,20 @@ void loop()
 				if (num != NULL)
 				{
 					toggle(num, LOW);
+					num = "\0"
 				} else {
-
-					for (int i = 0; i <= nums->length(); i++) // run through all entries in nums
-					{
-						digitalWrite(leds[i], LOW);
-					}
+					toggle("all", LOW);
 				}
 				num = "\0";
 				break;
         }
     }
+}
+
+void addNum(String nta)
+{
+	num = num + nta;
+	flash;
 }
 
 void flash() // flash indicator
@@ -158,9 +149,9 @@ void toggle( String num, int HL )
 {
 	for (int i = 0; i <= nums->length(); i++) // run through all entries in nums
 	{
-		if (num == nums[i])
+		if (num == nums[i] || num == "all")
 		{
-			digitalWrite(leds[i], 0x0);
+			digitalWrite(leds[i], HL);
 			break;
 		}
 	}

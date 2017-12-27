@@ -18,7 +18,6 @@
 
 // Ner Memorial Plaque Lighting System
 
-#include <Key.h>
 #include <Keypad.h>
 
 const byte ROWS = 4; // Four rows

@@ -16,7 +16,5 @@ jobs:
   only:
     - master
   script:
-    - mkdir arduino-1.6.9/libraries/key
-    - cp Ner_Lighting_System/key.h arduino-1.6.9/libraries/key
     - echo Verifying
     - ./arduino-1.6.9/arduino --verify --board arduino:avr:uno Ner_Lighting_System/Ner_Lighting_System.ino

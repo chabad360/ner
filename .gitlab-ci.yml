@@ -15,4 +15,4 @@ jobs:
     - gitlab
   script:
     - echo Verifying
-    - ./arduino-1.6.9/arduino --verify --board arduino:avr:uno Ner_Lighting_System.ino
+    - ./arduino-1.6.9/arduino --verify --board arduino:avr:uno ../Ner_Lighting_System.ino

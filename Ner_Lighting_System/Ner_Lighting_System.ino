@@ -54,6 +54,7 @@ void setup()
 	}
 
 	Serial.begin(9600);
+ Serial.println(nums->length());
 
 	// Initialize indicator LED
     pinMode(fli, OUTPUT);

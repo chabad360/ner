@@ -15,8 +15,8 @@
      along with this program.  If not, see <http://www.gnu.org/licenses/>
 */
 
-// Ner Memorial Plaque Lighting System
 
+// Ner Memorial Plaque Lighting System
 
 #include <Key.h>
 #include <Keypad.h>
@@ -40,8 +40,8 @@ Keypad kpd = Keypad( makeKeymap(keys), rowPins, colPins, ROWS, COLS ); // Create
 String num; // The LED we are trying to reach (used by the keypad)
  
 #define fli A1 // The indicator LED
-int leds[51] /* All our LEDs (in the addressable mode) */ = { 0, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50, 51}; //An array of all the leds
-String nums[51] /* All our LEDs (the way we type them) */ = { "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24", "25", "26", "27", "28", "29", "30", "31", "32", "33", "34", "35", "36", "37", "38", "39", "40", "41", "42", "43", "44", "45", "46", "47", "48", "49", "50", "51" }; //An array of identifiers for them
+/* All our LEDs (in the addressable mode) */ int leds[51] = { 0, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50, 51}; //An array of all the leds
+/* All our LEDs (the way we type them) */ String nums[51] = { "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24", "25", "26", "27", "28", "29", "30", "31", "32", "33", "34", "35", "36", "37", "38", "39", "40", "41", "42", "43", "44", "45", "46", "47", "48", "49", "50", "51" }; //An array of identifiers for them
 
 void setup()
 {
@@ -97,10 +97,10 @@ void loop()
 				addNum("9");
                 break;
             case 'A':
-				toggle("all", HIGH); // Toggle them all!!!
+				state("all", HIGH); // Toggle them all!!!
 				break;
             case 'B':
-				// Running this loop is more efficient than running toggle(), but this feature might be useless, I don't remember why I added it.
+				// Running this loop is more efficient than running state(), but this feature might be useless, I don't remember why I added it.
 				for (int i = 0; i <= nums->length(); i++) // run through all entries in nums
 				{
 					digitalWrite(leds[i], HIGH);
@@ -113,16 +113,16 @@ void loop()
             case 'D':
                 break;
             case '#':
-				toggle(num, HIGH); // Toggle the specified LED
+				state(num, HIGH); // Toggle the specified LED
 				num = "\0";
 				break;
             case '*':
 				if (num != NULL)
 				{
-					toggle(num, LOW); // Either toggle the specified LED
+					state(num, LOW); // Either toggle the specified LED
 					num = "\0";
 				} else {
-					toggle("all", LOW); // or if no LED is specified then turn them all off
+					state("all", LOW); // or if no LED is specified then turn them all off
 				}
 				num = "\0";
 				break;
@@ -130,13 +130,22 @@ void loop()
     }
 }
 
-void addNum(String nta) // Add the number 'nta' to 'num', used in our switch/case
+/*
+	void addNum(nta)
+	Desc: Concatenates the number 'nta' to 'num', used in our switch/case.
+	Args: String nta: The number to concatenate.
+*/
+void addNum(String nta)
 {
 	num = num + nta;
 	flash;
 }
 
-void flash() // Flash the indicator LED
+/*
+	void flash()
+	Desc: Flashes the indicator LED twice.
+*/
+void flash()
 {
     digitalWrite(fli, HIGH);
     delay(100);
@@ -147,9 +156,15 @@ void flash() // Flash the indicator LED
     digitalWrite(fli, LOW);
 }
 
-void toggle( String num, int HL ) // Toggle LED 'num' to state HL (can be HIGH or LOW) 
+/* 
+	void state(num, HL)
+	Desc: toggles LED 'num' to state 'HL'.
+	Args: String num: The LED to toggle (in the 'nums' array format).
+		  int HL: The state to set the LED to, can be HIGH or LOW.
+*/
+void state( String num, int HL )
 {
-	for (int i = 0; i <= nums->length(); i++) // run through all entries in 'nums'
+	for (int i = 0; i <= nums->length(); i++) // Run through all entries in 'nums'
 	{
 		if (num == nums[i] || num == "all")
 		{

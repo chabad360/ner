@@ -41,12 +41,13 @@ String num; // The LED we are trying to reach (used by the keypad)
 
 #define fli A1 // The indicator LED
 /* All our LEDs (in the addressable mode) */ int leds[51] = { 0, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50, 51}; //An array of all the leds
+int amount = 51; // The amount of LEDs necessary to turn them on.
 /* All our LEDs (the way we type them) */ String nums[51] = { "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24", "25", "26", "27", "28", "29", "30", "31", "32", "33", "34", "35", "36", "37", "38", "39", "40", "41", "42", "43", "44", "45", "46", "47", "48", "49", "50", "51" }; //An array of identifiers for them
 
 void setup()
 {
 	// Initialize all LEDs
-	for (int i = 0; i <= nums->length(); i++)
+	for (int i = 0; i <= amount; i++)
 	{
 		pinMode(leds[i], OUTPUT);
 		digitalWrite(leds[i], LOW);
@@ -54,7 +55,6 @@ void setup()
 	}
 
 	Serial.begin(9600);
- Serial.println(nums->length());
 
 	// Initialize indicator LED
     pinMode(fli, OUTPUT);
@@ -69,7 +69,6 @@ void loop()
 	if (Serial.available() == true)
 	{
 		key = Serial.read();
-		Serial.println(key);
 	}
 
     if(key)  // Check for a valid key.
@@ -112,7 +111,7 @@ void loop()
 				break;
             case 'B':
 				// Running this loop is more efficient than running state(), but this feature might be useless, I don't remember why I added it.
-				for (int i = 0; i <= nums->length(); i++) // run through all entries in nums
+				for (int i = 0; i <= amount; i++) // run through all entries in nums
 				{
 					digitalWrite(leds[i], HIGH);
 					delay(1000);
@@ -175,7 +174,7 @@ void flash()
 */
 void state( String num, int HL )
 {
-	for (int i = 0; i <= nums->length(); i++) // Run through all entries in 'nums'
+	for (int i = 0; i <= amount; i++) // Run through all entries in 'nums'
 	{
 		if (num == nums[i] || num == "all")
 		{

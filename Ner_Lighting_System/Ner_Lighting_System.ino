@@ -65,7 +65,10 @@ void loop()
 {
 	char key;
 	key	= kpd.getKey();
-	key = Serial.read();
+	if (Serial.available() == true)
+	{
+		key = Serial.read();
+	}
 
     if(key)  // Check for a valid key.
     {

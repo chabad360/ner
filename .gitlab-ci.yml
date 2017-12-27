@@ -8,7 +8,6 @@ before_script:
   - /etc/init.d/xvfb stop; echo hola!; /etc/init.d/xvfb start; ps -eAf|grep -i xvfb
   - /sbin/start-stop-daemon --start --quiet --pidfile /tmp/xvfb_1.pid --make-pidfile --background --exec /usr/bin/Xvfb -- :1 -ac -screen 0 1280x1024x16
   - git clone https://github.com/adafruit/Adafruit_NeoPixel.git arduino-1.6.9/libraries/Adafruit_NeoPixel
-  - apt-get install unzip -y
   - wget https://playground.arduino.cc/uploads/Code/keypad.zip
   - unzip keypad.zip  -d arduino-1.6.9/libraries/
 

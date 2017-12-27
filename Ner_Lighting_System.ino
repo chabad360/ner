@@ -52,7 +52,8 @@ void setup()
 		digitalWrite(leds[i], LOW);
 		break;
 	}
-  
+
+	// Initialize indicator LED
     pinMode(fli, OUTPUT);
 	digitalWrite(fli, LOW);
 }
@@ -62,7 +63,7 @@ void loop()
     char key = kpd.getKey();
     if(key)  // Check for a valid key.
     {
-        switch (key)
+        switch (key) // What to do for every key
         {
             case '0':
 				addNum("0");
@@ -96,9 +97,10 @@ void loop()
 				addNum("9");
                 break;
             case 'A':
-				toggle("all", HIGH);
+				toggle("all", HIGH); // Toggle them all!!!
 				break;
             case 'B':
+				// Running this loop is more efficient than running toggle(), but this feature might be useless, I don't remember why I added it.
 				for (int i = 0; i <= nums->length(); i++) // run through all entries in nums
 				{
 					digitalWrite(leds[i], HIGH);
@@ -111,16 +113,16 @@ void loop()
             case 'D':
                 break;
             case '#':
-				toggle(num, HIGH);
+				toggle(num, HIGH); // Toggle the specified LED
 				num = "\0";
 				break;
             case '*':
 				if (num != NULL)
 				{
-					toggle(num, LOW);
-					num = "\0"
+					toggle(num, LOW); // Either toggle the specified LED
+					num = "\0";
 				} else {
-					toggle("all", LOW);
+					toggle("all", LOW); // or if no LED is specified then turn them all off
 				}
 				num = "\0";
 				break;
@@ -128,13 +130,13 @@ void loop()
     }
 }
 
-void addNum(String nta)
+void addNum(String nta) // Add the number 'nta' to 'num', used in our switch/case
 {
 	num = num + nta;
 	flash;
 }
 
-void flash() // flash indicator
+void flash() // Flash the indicator LED
 {
     digitalWrite(fli, HIGH);
     delay(100);
@@ -145,9 +147,9 @@ void flash() // flash indicator
     digitalWrite(fli, LOW);
 }
 
-void toggle( String num, int HL )
+void toggle( String num, int HL ) // Toggle LED 'num' to state HL (can be HIGH or LOW) 
 {
-	for (int i = 0; i <= nums->length(); i++) // run through all entries in nums
+	for (int i = 0; i <= nums->length(); i++) // run through all entries in 'nums'
 	{
 		if (num == nums[i] || num == "all")
 		{

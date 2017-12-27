@@ -68,6 +68,7 @@ void loop()
 	if (Serial.available() == true)
 	{
 		key = Serial.read();
+		Serial.println(key);
 	}
 
     if(key)  // Check for a valid key.

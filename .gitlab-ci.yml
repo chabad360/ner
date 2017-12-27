@@ -10,9 +10,8 @@ before_script:
   - git clone https://github.com/adafruit/Adafruit_NeoPixel.git arduino-1.6.9/libraries/Adafruit_NeoPixel
 
 
-jobs:
-  only:
-    - gitlab
+compile:
+
   script:
     - echo Verifying
     - ./arduino-1.6.9/arduino --verify --board arduino:avr:mega:atmega2560 Ner_Lighting_System.ino

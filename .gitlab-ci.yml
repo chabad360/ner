@@ -1,5 +1,8 @@
 image: jeroenknoops/java8-groovy-chrome-xvfb
 
+stages:
+  - build
+
 before_script:
   - sleep 3
   - wget http://downloads.arduino.cc/arduino-1.6.9-linux64.tar.xz
@@ -11,8 +14,9 @@ before_script:
 
 
 jobs:
+  stage: build
   only:
-    - gitlab
+    - master
   script:
     - echo Verifying
     - ./arduino-1.6.9/arduino --verify --board arduino:avr:mega:atmega2560 Ner_Lighting_System/Ner_Lighting_System.ino

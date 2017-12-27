@@ -11,6 +11,9 @@ before_script:
 
 
 compile:
+  
+  only:
+    -gitlab
 
   script:
     - echo Verifying

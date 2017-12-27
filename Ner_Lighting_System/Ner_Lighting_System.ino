@@ -38,7 +38,7 @@ byte colPins[COLS] = { A12, A13, A14, A15 }; // Connect keypad COL0, COL1, COL2 
 Keypad kpd = Keypad( makeKeymap(keys), rowPins, colPins, ROWS, COLS ); // Create the Keypad
 
 String num; // The LED we are trying to reach (used by the keypad)
- 
+
 #define fli A1 // The indicator LED
 /* All our LEDs (in the addressable mode) */ int leds[51] = { 0, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50, 51}; //An array of all the leds
 /* All our LEDs (the way we type them) */ String nums[51] = { "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24", "25", "26", "27", "28", "29", "30", "31", "32", "33", "34", "35", "36", "37", "38", "39", "40", "41", "42", "43", "44", "45", "46", "47", "48", "49", "50", "51" }; //An array of identifiers for them
@@ -53,14 +53,20 @@ void setup()
 		break;
 	}
 
+	Serial.begin(9600);
+
 	// Initialize indicator LED
     pinMode(fli, OUTPUT);
 	digitalWrite(fli, LOW);
+
 }
 
 void loop()
 {
-    char key = kpd.getKey();
+	char key;
+	key	= kpd.getKey();
+	key = Serial.read();
+
     if(key)  // Check for a valid key.
     {
         switch (key) // What to do for every key

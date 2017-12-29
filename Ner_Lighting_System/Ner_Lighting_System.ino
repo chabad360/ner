@@ -1,5 +1,5 @@
-/*	 The Ner Memorial Plaque Lighting System is a modern system for controlling the light on a memorial plaque
-     Copyright (C) 2016  Mendel Greenberg
+/*	 The Ner Memorial Plaque Lighting System is a modern system for controlling the lights on a memorial board
+     Copyright (C) 2016-18  Mendel Greenberg
 
      This program is free software: you can redistribute it and/or modify
      it under the terms of the GNU General Public License as published by
@@ -20,8 +20,8 @@
 
 #include <Keypad.h>
 
-const byte ROWS = 4; // Four rows
-const byte COLS = 4; // Four columns
+const byte ROWS = 4; // Four rows on the Keypad
+const byte COLS = 4; // Four columns on the Keypad
 
 char keys[ROWS][COLS] =  /* Define the Keymap */ {
     {'1','2','3','A'},
@@ -34,14 +34,17 @@ byte rowPins[ROWS] = { A8, A9, A10, A11 }; // Connect keypad ROW0, ROW1, ROW2 an
 
 byte colPins[COLS] = { A12, A13, A14, A15 }; // Connect keypad COL0, COL1, COL2 and COL3 to these Arduino pins.
 
-Keypad kpd = Keypad( makeKeymap(keys), rowPins, colPins, ROWS, COLS ); // Create the Keypad
+Keypad kpd = Keypad(makeKeymap(keys), rowPins, colPins, ROWS, COLS); // Create the Keypad.
 
-String num; // The LED we are trying to reach (used by the keypad)
+String num; // The LED we are trying to reach (used by the keypad).
 
-#define fli A1 // The indicator LED
-/* All our LEDs (in the addressable mode) */ int leds[51] = { 0, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50, 51}; //An array of all the leds
-int amount = 51; // The amount of LEDs necessary to turn them on.
-/* All our LEDs (the way we type them) */ String nums[51] = { "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24", "25", "26", "27", "28", "29", "30", "31", "32", "33", "34", "35", "36", "37", "38", "39", "40", "41", "42", "43", "44", "45", "46", "47", "48", "49", "50", "51" }; //An array of identifiers for them
+#define indicator A1 // The indicator LED.
+
+#define amount 51 // The amount of LEDs, necessary to turn them on.
+
+/* All our LEDs (in the addressable mode) */ int leds[amount] = { 53 /* This is LED number 1 but because we use serial, we need to have it at another pin, and 53 works */, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50, 51};
+
+/* All our LEDs (the way we type them) */ String nums[amount] = { "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24", "25", "26", "27", "28", "29", "30", "31", "32", "33", "34", "35", "36", "37", "38", "39", "40", "41", "42", "43", "44", "45", "46", "47", "48", "49", "50", "51" };
 
 void setup()
 {
@@ -53,33 +56,32 @@ void setup()
 		break;
 	}
 
-	Serial.begin(9600);
+	Serial.begin(9600); // Useful when you want to add outside communication to the system (e.x. testing, RPi, etc.)
 
 	// Initialize indicator LED
-    pinMode(fli, OUTPUT);
-	digitalWrite(fli, LOW);
+    pinMode(indicator, OUTPUT);
+	digitalWrite(indicator, LOW);
 
 }
 
 void loop()
 {
 	char key;
-	key	= kpd.getKey();
-	if (Serial.available() == true)
+	key	= kpd.getKey(); // Get the key from the keypad...
+	if (Serial.available() == true) // or from serial.
 	{
 		key = Serial.read();
 	}
 
-    if(key)  // Check for a valid key.
+    if(key)  // If there is a key:
     {
-        switch (key) // What to do for every key
+        switch (key) // Then... it depends on the key:
         {
             case '0':
 				addNum("0");
                 break;
             case '1':
 				addNum("1");
-                flash();
                 break;
             case '2':
 				addNum("2");
@@ -109,8 +111,8 @@ void loop()
 				state("all", HIGH); // Toggle them all!!!
 				break;
             case 'B':
-				// Running this loop is more efficient than running state(), but this feature might be useless, I don't remember why I added it.
-				for (int i = 0; i <= amount; i++) // run through all entries in nums
+				// Running this loop is more efficient than running state(), but this feature might be useless, I don't remember why I added it. ~chabad360
+				for (int i = 0; i <= amount; i++) // run through all entries in 'nums'
 				{
 					digitalWrite(leds[i], HIGH);
 					delay(1000);
@@ -156,13 +158,13 @@ void addNum(String nta)
 */
 void flash()
 {
-    digitalWrite(fli, HIGH);
+    digitalWrite(indicator, HIGH);
     delay(100);
-    digitalWrite(fli, LOW);
+    digitalWrite(indicator, LOW);
     delay(100);
-    digitalWrite(fli, HIGH);
+    digitalWrite(indicator, HIGH);
     delay(100);
-    digitalWrite(fli, LOW);
+    digitalWrite(indicator, LOW);
 }
 
 /* 

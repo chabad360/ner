@@ -1,6 +1,6 @@
 # Ner Memorial Plaque Lighting System
 
-![build status](https://img.shields.io/badge/build-ok-brightgreen.svg)
+[![build status](https://gitlab.com/chabad360/ner/badges/master/pipeline.svg)](https://gitlab.com/chabad360/ner/master/commits)
 
 The Ner Memorial Plaque Lighting System is a controller for Memorial Boards in situations like this:
 ![](https://www.bcd-urbex.com/wp-content/uploads/2014/02/IMG_8063_4_5_6_7_tonemapped2.jpg)

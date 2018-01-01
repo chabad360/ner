@@ -17,7 +17,7 @@ It is designed to be easily integrated in to any sort of board as long as there 
 |Arduino Mega    |1             |
 
 2. Run the [ner-number-generator](https://gitlab.com/chabad360/ner-number-generator)
-3. Copy the output to lines `43` through `47`
-4. Upload the sketch and send it to the arduino.
+3. Replace lines `43` through `47` with the output.
+4. Upload the sketch and send it to the arduino mega.
 5. Follow the diagram to setup the arduino:
 ![](layout.jpg)

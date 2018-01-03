@@ -11,6 +11,8 @@
 *.vcxproj.filters
 _vm/
 sketch.json
+arduino.json
+c_cpp_properties.json
 
 # User-specific files (MonoDevelop/Xamarin Studio)
 *.userprefs

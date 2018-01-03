@@ -20,6 +20,7 @@
 
 #include <Keypad.h>
 
+#pragma region keypad
 const byte ROWS = 4; // Four rows on the Keypad
 const byte COLS = 4; // Four columns on the Keypad
 
@@ -37,14 +38,17 @@ byte colPins[COLS] = { A12, A13, A14, A15 }; // Connect keypad COL0, COL1, COL2 
 Keypad kpd = Keypad(makeKeymap(keys), rowPins, colPins, ROWS, COLS); // Create the Keypad.
 
 String num; // The LED we are trying to reach (used by the keypad).
+#pragma endregion
 
 #define indicator A1 // The indicator LED.
 
+#pragma region LEDs
 #define amount 51 // The amount of LEDs, necessary to turn them on.
 
 /* All our LEDs (in the addressable mode) */ int leds[amount] = { 53 /* This is LED number 1 but because we use serial, we need to have it at another pin, and 53 works */, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50, 51 };
 
 /* All our LEDs (the way we type them) */ String nums[amount] = { "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24", "25", "26", "27", "28", "29", "30", "31", "32", "33", "34", "35", "36", "37", "38", "39", "40", "41", "42", "43", "44", "45", "46", "47", "48", "49", "50", "51", };
+#pragma endregion
 
 void setup()
 {
@@ -140,6 +144,7 @@ void loop()
     }
 }
 
+#pragma region addNum()
 /*
 	void addNum(nta)
 	Desc: Concatenates the number 'nta' to 'num', used in our switch/case.
@@ -150,7 +155,9 @@ void addNum(String nta)
 	num = num + nta;
 	flash;
 }
+#pragma endregion
 
+#pragma region flash()
 /*
 	void flash()
 	Desc: Flashes the indicator LED twice.
@@ -165,7 +172,10 @@ void flash()
     delay(100);
     digitalWrite(indicator, LOW);
 }
+#pragma endregion
 
+
+#pragma region state()
 /* 
 	void state(num, HL)
 	Desc: toggles LED 'num' to state 'HL'.
@@ -182,3 +192,4 @@ void state( String num, int HL )
 		}
 	}
 }
+#pragma endregion

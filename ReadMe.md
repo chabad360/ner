@@ -16,7 +16,7 @@ It is designed to be easily integrated in to any sort of board as long as there 
 |Orange LED      |Max 52 +1     |
 |Arduino Mega    |1             |
 
-2. Run the [ner-number-generator](chabad360/ner-number-generator)
+2. Run the [ner-number-generator](https://gitlab.com/chabad360/ner-number-generator)
 3. Replace lines `45` through `50` with the output.
 4. Upload the sketch and send it to the arduino mega.
 5. Follow the diagram to setup the arduino:
